@@ -7,7 +7,7 @@ When a request is received it is passed through the TokenManager middleware. Ins
 
 Few example uses cases: 
 1. If you need to reuse the access token when calling another service.
-2. If you need to extract user info from the access token for data storage.
+2. If you need to extract user info from the access token for data storage, and you want to maintain seperation of concerns.
 
 
 Example code:
