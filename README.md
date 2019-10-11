@@ -19,19 +19,12 @@ public class Startup
 {
       public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-                app.UseDeveloperExceptionPage();
-            else
-                app.UseHsts();
-
-            app.UseHttpsRedirection();
-            
-            app.UseAuthentication();
+            ...
             
             //Define name of token in the function argument.
             app.UseTokenManager(options => { options.TokenName = "access_token"; });
             
-            app.UseMvc();
+            ...
 
         }
 }
@@ -43,9 +36,11 @@ public class Startup
 {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            ...
             
             services.AddTokenManager();
+
+            ...
         }
 }
 ```
