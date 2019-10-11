@@ -21,7 +21,7 @@ public class Startup
         {
             ...
             
-            //Define name of token in the function argument.
+            //Define name of token in the action argument.
             app.UseTokenManager(options => { options.TokenName = "access_token"; });
             
             ...
