@@ -1,5 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TeaMonkeyFruit.Token
 {
@@ -12,6 +13,13 @@ namespace TeaMonkeyFruit.Token
             configureOptions(tokenOptions);
             
             return builder.UseMiddleware<TokenMiddleware>(tokenOptions);
+        }
+
+        public static IServiceCollection AddTokenManager(this IServiceCollection services)
+        {
+            services.AddScoped<ITokenManager, TokenManager>();
+
+            return services;
         }
     }
 }
