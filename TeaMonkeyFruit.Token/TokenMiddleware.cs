@@ -7,17 +7,15 @@ namespace TeaMonkeyFruit.Token
     public class TokenMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly TokenOptions _tokenOptions;
 
-        public TokenMiddleware(RequestDelegate next, TokenOptions options)
+        public TokenMiddleware(RequestDelegate next)
         {
             _next = next;
-            _tokenOptions = options;
         }
 
         public async Task Invoke(HttpContext httpContext, ITokenManager tokenManager)
         {
-            tokenManager.SetAccessToken(await httpContext.GetTokenAsync(_tokenOptions.TokenName));
+            tokenManager.SetAccessToken(httpContext.Request.Headers["Authorization"]);
             await _next(httpContext);
         }
     }

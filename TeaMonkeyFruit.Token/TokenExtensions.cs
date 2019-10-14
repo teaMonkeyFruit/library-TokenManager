@@ -7,12 +7,9 @@ namespace TeaMonkeyFruit.Token
     public static class TokenExtensions
     {
         public static IApplicationBuilder UseTokenManager(
-            this IApplicationBuilder builder, Action<TokenOptions> configureOptions)
-        {
-            var tokenOptions = new TokenOptions();
-            configureOptions(tokenOptions);
-            
-            return builder.UseMiddleware<TokenMiddleware>(tokenOptions);
+            this IApplicationBuilder builder)
+        {       
+            return builder.UseMiddleware<TokenMiddleware>();
         }
 
         public static IServiceCollection AddTokenManager(this IServiceCollection services)
