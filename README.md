@@ -7,7 +7,7 @@ When a request is received it is passed through the TokenManager middleware. Ins
 
 Few example uses cases: 
 1. If you need to reuse the access token when calling another service.
-2. If you need to extract user info from the access token for data storage.
+2. If you need to extract user info from the access token for data storage, and you want to maintain seperation of concerns.
 
 
 Example code:
@@ -19,19 +19,12 @@ public class Startup
 {
       public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-                app.UseDeveloperExceptionPage();
-            else
-                app.UseHsts();
-
-            app.UseHttpsRedirection();
+            ...
             
-            app.UseAuthentication();
-            
-            //Define name of token in the function argument.
+            //Define name of token in the action argument.
             app.UseTokenManager(options => { options.TokenName = "access_token"; });
             
-            app.UseMvc();
+            ...
 
         }
 }
@@ -43,9 +36,11 @@ public class Startup
 {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            ...
             
             services.AddTokenManager();
+
+            ...
         }
 }
 ```
