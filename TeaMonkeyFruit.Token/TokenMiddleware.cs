@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +16,10 @@ namespace TeaMonkeyFruit.Token
 
         public async Task Invoke(HttpContext httpContext, ITokenManager tokenManager)
         {
-            tokenManager.SetAccessToken(httpContext.Request.Headers["Authorization"]);
+            var header = httpContext.Request.Headers["Authorization"];
+            var token = header.ToString().Split().LastOrDefault();
+            
+            tokenManager.SetAccessToken(token);
             await _next(httpContext);
         }
     }
